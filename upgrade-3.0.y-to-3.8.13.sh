@@ -5,14 +5,16 @@
 
 set -e
 
+echo "NOTICE: this is experimental!"
+
 ARCHIVE=$PWD/kernel-modules-3.8.13.tar.xz
 wget "https://odroid-wheezy-retro.googlecode.com/files/kernel-modules-3.8.13.tar.xz" -O $ARCHIVE
 
 cd /
 tar xfv $ARCHIVE
 
-sudo mv -vi /boot/uInitrd /boot/uInitrd-`uname -r`
-sudo mv -vi /boot/zImage /boot/zImage-`uname -r`
+mv -vi /boot/uInitrd /boot/uInitrd-`uname -r`
+mv -vi /boot/zImage /boot/zImage-`uname -r`
 
 wget "https://odroid-wheezy-retro.googlecode.com/files/zImage-3.8.13" -O /boot/zImage
 
