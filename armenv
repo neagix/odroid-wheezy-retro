@@ -1,0 +1,12 @@
+#!/bin/bash
+## Default ODROID optimized compilation flags
+## @author neagix
+##
+## include/run this before compiling for ODROID devices
+## With these optimizations best performance achieved on 3.8 kernels
+#
+
+export CFLAGS='-marm -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard'
+export CXXFLAGS='-marm -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard'
+export ASFLAGS='-marm -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard'
+
