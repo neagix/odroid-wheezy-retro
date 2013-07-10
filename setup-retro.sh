@@ -1,23 +1,21 @@
 #!/bin/bash
-## @author: neagix
-## update scripts, pull all necessary sources and build them
+## @author neagix
+## build RetroArch and its cores with ARM optimizations
 #
 
 ## stop on any error
 set -e
 
-git fetch
-if [ $(git log HEAD..origin/master | grep sh) ]; then
-	echo "Some scripts updated, please run again"
-	git pull -v &
-	exit
-fi
+export CFLAGS='-marm -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard'
+export CXXFLAGS='-marm -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard'
+export ASFLAGS='-marm -mcpu=cortex-a9 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard'
 
 function build_retroarch() {
-	DEFOPTS="--enable-alsa --disable-oss --disable-jack --disable-pulse --enable-xvideo"
+	CONFIGOPTS="--enable-alsa --disable-oss --disable-jack --disable-pulse --enable-xvideo --enable-fbo --enable-x11 "
+	CONFIGOPTS="$CONFIGOPTS --enable-opengl --enable-gles --disable-kms --disable-vg --enable-dylib --disable-ffmpeg"
 
 	cd retroarch
-	./configure $DEFOPTS --enable-x11 --enable-opengl --enable-gles --disable-kms --disable-vg && \
+	./configure $CONFIGOPTS && \
 	make -j5
 	strip retroarch tools/retroarch-joyconfig
 	cp retroarch tools/retroarch-joyconfig ~/bin
@@ -25,7 +23,6 @@ function build_retroarch() {
 
 function build_snes9x() {
 	cd libretro-snes9x
-	CFLAGS="$CFLAGS -mfpu=neon -mfloat-abi=hard" CXXFLAGS="$CXXFLAGS -mfpu=neon -mfloat-abi=hard" ASFLAGS="$ASFLAGS -mfpu=neon -mfloat-abi=hard" \
 	make -j5 -f Makefile.libretro
 	strip snes9x_next_libretro.so
 	cp snes9x_next_libretro.so ~/.retroarch/cores/snes9x.so
