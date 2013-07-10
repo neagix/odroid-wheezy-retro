@@ -29,7 +29,7 @@ function build_snes9x() {
 }
 
 if [ ! -d retroarch ]; then
-	git clone https://github.com/neagix/RetroArch.git retroarch --depth=0
+	git clone https://github.com/libretro/RetroArch.git retroarch --depth=0
 fi
 build_retroarch
 
