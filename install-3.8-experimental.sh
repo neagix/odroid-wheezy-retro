@@ -15,3 +15,5 @@ BASEURL=http://oph.mdrjr.net/neagix/odroid-linux-3.8
 wget -q $BASEURL/modules-3.8.tar.bz -O - | tar xfjv - -C/
 wget -q $BASEURL/uInitrd-3.8.13.6 -O /boot/uInitrd
 wget -q $BASEURL/zImage-3.8.13.6 -O /boot/zImage
+
+sed -i 's/fb6/fb1/g' /etc/X11/xorg.conf
