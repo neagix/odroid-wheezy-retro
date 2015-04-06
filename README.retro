@@ -1,4 +1,5 @@
-= odroid-debian-wheezy =
+odroid-debian-wheezy
+====================
 
 Available binaries in this release:
 
@@ -7,4 +8,6 @@ Available binaries in this release:
   * es2gears
   * eduke32
 
-Read more at http://code.google.com/p/odroid-wheezy-retro/wiki/Index
+Read more at https://github.com/neagix/odroid-wheezy-retro/wiki
+
+Alternative download location: http://oph.mdrjr.net/neagix/
